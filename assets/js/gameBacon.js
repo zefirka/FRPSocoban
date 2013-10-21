@@ -12,9 +12,8 @@ $(document).ready(function(){
 
            for(var j=0;j<heigth;j++){
                $row.append("<div class='cell'></div>");
-               if(i==0 || i==width-1 || j==0 || j==heigth-1){
+               if(i==0 || i==width-1 || j==0 || j==heigth-1)
                    this.walls.push({x:i,y:j});
-               }
            }
        }
 
@@ -124,7 +123,4 @@ $(document).ready(function(){
 
    var game = new Socoban(8,8,level1);   
    update(game);
-
 });
-
-
