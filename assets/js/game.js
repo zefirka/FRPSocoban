@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  var Socoban = function(width,heigth,lvl){
+  var Sokoban = function(width,heigth,lvl){
     var that = {
       player : lvl.player,
       blocks : lvl.blocks,
@@ -7,7 +7,7 @@ $(document).ready(function(){
       walls : lvl.walls,
       direction : {x:0,y:0},
 
-      drawAll : function(){
+      update : function(){
         for(var i=0,l=that.walls.length;i<l;i++)
           that.draw(that.walls[i], "rgb(184, 184, 184)");
 
@@ -117,7 +117,7 @@ $(document).ready(function(){
                 }
               }
             }
-            that.drawAll();         
+            that.update();         
           }
         });
       }
@@ -135,7 +135,7 @@ $(document).ready(function(){
         }
       }
 
-      that.drawAll();
+      that.update();
       that.bindEvents();
       return that;
     }
@@ -148,5 +148,5 @@ $(document).ready(function(){
     goals  : [{x:5,y:4},{x:5,y:5}],
     walls  : [{x:7,y:1},{x:7,y:2},{x:7,y:3},{x:6,y:3},{x:6,y:4}]
   }
-  var game = new Socoban(8,8,level1);
+  var game = new Sokoban(8,8,level1);
 });

@@ -1,5 +1,5 @@
   $(document).ready(function(){
-  var Socoban = function(width, heigth,lvl){ 
+  var Sokoban = function(width, heigth,lvl){ 
     var that = {
       player : lvl.player,
       goals   : lvl.goals,
@@ -31,20 +31,25 @@
         }        
       },
 
+      draw : function(pos, color){
+        var $row = $($(".row")[pos.y]), $cell = $($(".cell", $row)[pos.x]);
+        $cell.css("background-color",color);
+      },
+
       update : function(){
         for(var i=0,l=that.walls.length;i<l;i++)
-          draw(that.walls[i], "rgb(184, 184, 184)"); 
+          that.draw(that.walls[i], "rgb(184, 184, 184)"); 
 
         for(var i=0,l=that.mines.length;i<l;i++)
-          draw(that.mines[i], "rgb(216, 18, 18)");  
+          that.draw(that.mines[i], "rgb(216, 18, 18)");  
 
         for(var i=0,l=that.blocks.length;i<l;i++)
-          draw(that.blocks[i], "rgb(181, 184, 255)");
+          that.draw(that.blocks[i], "rgb(181, 184, 255)");
 
         for(var i=0,l=that.goals.length;i<l;i++)
-          draw(that.goals[i], "rgb(255, 235, 0)");
+          that.draw(that.goals[i], "rgb(255, 235, 0)");
 
-        draw(that.player, "rgb(130, 212, 130)");
+        that.draw(that.player, "rgb(130, 212, 130)");
       }
     }; //end of that
 
@@ -67,7 +72,7 @@
     var playerMove = $(document).asEventStream("keydown").filter(isArrows).map(player).map(nextCell);
 
     var playerNextEmpty =  playerMove.filter(isEmpty).onValue(function(nov){
-      draw(that.player, "white");
+      that.draw(that.player, "white");
       that.player.x = nov.x;
       that.player.y = nov.y;
       that.update(that);
@@ -76,7 +81,7 @@
     var goalMove = playerMove.map(isGoal).filter(function(x){return x});
 
     var goalNextEmpty = goalMove.map(nextCell).filter(isEmpty).onValue(function(cell){
-      draw(that.player, "white");
+      that.draw(that.player, "white");
       that.player.x = cell.x-that.direction.x;
       that.player.y = cell.y-that.direction.y;
       that.goals[cell.i].x = cell.x;
@@ -104,10 +109,6 @@
   function selectDirection(e){return { x : e.keyCode % 2 ? e.keyCode - 38 : 0, y : !(e.keyCode % 2) ? e.keyCode - 39 : 0 }}
   function nextCell(cell){return {x:cell.x+game.direction.x, y:cell.y+game.direction.y, i:cell.i}}
   function player(event){return game.player}
-  function draw(pos, color){
-    var $row = $($(".row")[pos.y]), $cell = $($(".cell", $row)[pos.x]);
-    $cell.css("background-color",color);
-  }
   function isEmpty(e){
     for(var i=0,l=game.walls.length;i<l;i++){
       if(e.x == game.walls[i].x && e.y == game.walls[i].y)
@@ -143,6 +144,5 @@
     //мины
     mines  : [{x:3,y:5}]
   }
-
-  var game = Socoban(8,8,level1);   
+  var game = Sokoban(8,8,level1);   
 });
