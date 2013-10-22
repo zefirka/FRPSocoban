@@ -5,6 +5,7 @@ $(document).ready(function(){
       blocks : lvl.blocks,
       goals : lvl.goals,
       walls : lvl.walls,
+      direction : {x:0,y:0},
 
       drawAll : function(){
         for(var i=0,l=that.walls.length;i<l;i++)
@@ -13,14 +14,14 @@ $(document).ready(function(){
         for(var i=0,l=that.blocks.length;i<l;i++)
           that.draw(that.blocks[i], "rgb(181, 184, 255)");
 
-        for(var i=0,l=that.goals.length;i<l;i++){
+        for(var i=0,l=that.goals.length;i<l;i++)
           that.draw(that.goals[i], "rgb(255, 235, 0)");
 
         that.draw(that.player, "rgb(130, 212, 130)");
       },
 
       draw : function(pos, color){
-        var $row = $($(".row")[pos.y]), $cell = $($(".cell", $(row))[pos.x]);              
+        var $row = $($(".row")[pos.y]), $cell = $($(".cell", $row)[pos.x]);              
         $cell.css("background-color",color);
       },
 
@@ -88,29 +89,29 @@ $(document).ready(function(){
 
         $(document).on("keydown", function(e){
           if(e.keyCode >= 37 && e.keyCode <= 40){
-            direction = {
+            that.direction = {
               x : e.keyCode % 2 ? e.keyCode - 38 : 0,
               y : !(e.keyCode % 2) ? e.keyCode - 39 : 0
             }
 
-            if(nextMoveEmpty(that.player, direction)){
-              that.player.x += direction.x;
-              that.player.y += direction.y;
+            if(nextMoveEmpty(that.player, that.direction)){
+              that.player.x += that.direction.x;
+              that.player.y += that.direction.y;
 
               that.draw(that.player, "rgb(130, 212, 130)");
-              that.draw({x:that.player.x-direction.x, y:that.player.y-direction.y}, "white");
+              that.draw({x:that.player.x-that.direction.x, y:that.player.y-that.direction.y}, "white");
 
             }else{
-              var nint = nextMoveIsGoal(that.player, direction);
+              var nint = nextMoveIsGoal(that.player, that.direction);
               if(nint){
-                if(nextMoveEmpty(nint, direction)){
-                  that.goals[nint.i].x = nint.x + direction.x;
-                  that.goals[nint.i].y = nint.y + direction.y;
-                  that.player.x += direction.x;
-                  that.player.y += direction.y;
-                  that.draw({x:that.player.x-direction.x, y:that.player.y-direction.y}, "white");
+                if(nextMoveEmpty(nint, that.direction)){
+                  that.goals[nint.i].x = nint.x + that.direction.x;
+                  that.goals[nint.i].y = nint.y + that.direction.y;
+                  that.player.x += that.direction.x;
+                  that.player.y += that.direction.y;
+                  that.draw({x:that.player.x-that.direction.x, y:that.player.y-that.direction.y}, "white");
 
-                  if(nextMoveIsBlock(nint, direction)){
+                  if(nextMoveIsBlock(nint, that.direction)){
                     that.checkVictory();
                   }
                 }
@@ -141,7 +142,6 @@ $(document).ready(function(){
     return init();
   };
 
-  var direction = {x:0,y:0};
   var level1 = {
     player : {x:1,y:1},
     blocks : [{x:3,y:3},{x:3,y:4}],
