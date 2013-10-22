@@ -51,7 +51,7 @@
 
         that.draw(that.player, "rgb(130, 212, 130)");
       }
-    }; //end of that
+    };
 
     for(var i=0;i<width;i++){
       $(".game").append("<div class='row'></div>");
