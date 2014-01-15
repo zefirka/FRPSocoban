@@ -5,9 +5,22 @@
     <title>Sokoban</title>
 
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="Bacon.js"></script>
+    <script type="text/javascript" src="../Bacon.js"></script>
     <script type="text/javascript" src="main.js"></script> 
-
+    <script type="text/javascript">
+  $(document).ready(function(){
+    var level = {
+      width: 8,
+      height: 8,
+      player : {x:1,y:1},
+      blocks : [{x:3,y:3},{x:3,y:4}],
+      goals  : [{x:5,y:4},{x:5,y:5}],
+      walls  : [{x:7,y:1},{x:7,y:2},{x:7,y:3},{x:6,y:3},{x:6,y:4},{x:2,y:6},{x:3,y:6},{x:5,y:2},{x:6,y:2}],
+      mines : [{x:2,y:4}]
+    }
+    var game = new Sokoban(level);       
+  })
+    </script>
     <style type="text/css">
         body{
             display:inline-block;

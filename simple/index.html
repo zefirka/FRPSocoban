@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Sokoban</title>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="../Bacon.js"></script>
+    <script type="text/javascript" src="main.js"></script> 
+    <script type="text/javascript">
+
+      $(document).ready(function(){
+        var level = {
+          width: 8,
+          height: 8,
+          player : {x:1,y:1},
+          blocks : [{x:3,y:3},{x:3,y:4}],
+          goals  : [{x:5,y:4},{x:5,y:5}],
+          walls  : [{x:7,y:1},{x:7,y:2},{x:7,y:3},{x:6,y:3},{x:6,y:4},{x:2,y:6},{x:3,y:6},{x:5,y:2},{x:6,y:2}]
+        }
+        var game = new Sokoban(level);       
+      })
+
+
+    </script>
+    <style type="text/css">
+        body{
+            display:inline-block;
+        }
+
+        #game{
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: gray;
+            display: inline-block;
+            margin: 0;
+            border: solid 5px rgba(0,0,0,0.4);
+            border-radius: 5px;
+            padding: 0 2px;
+            padding-bottom: 2px;
+            box-shadow: 3px 4px 3px rgba(0,0,0,0.31);
+        }
+        .row{
+            margin: 2px 0px;
+            padding: 0px;
+            height: 14px;
+        }
+        .cell{
+            width:14px;
+            height: 14px;
+            border-radius: 2px;
+            background-color: white;
+            display: inline-block;
+            margin: 1px;
+            padding: 0px
+        }
+    </style>
+    </head>
+    <body>
+        <div id="game"></div>
+    </body>
+</html>
