@@ -23,7 +23,7 @@ var Sokoban = function(level){
   function drawLvl(){
     for(var i=0,l=lvl.walls.length;i<l;i++)
       draw(lvl.walls[i], "rgb(184, 184, 184)"); 
-
+    
     for(var i=0,l=lvl.mines.length;i<l;i++)
           draw(lvl.mines[i], "rgb(216, 18, 18)");  
 
