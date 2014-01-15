@@ -133,7 +133,7 @@
   function isMine(e){
     for(var i=0,l=game.mines.length;i<l;i++){
       if( e.x== game.mines[i].x && e.y == game.mines[i].y )
-        return {x:e.x,y:e.y}                    
+        return {x:e.x,y:e.y,i:i}                    
     }
     return false;
   }
