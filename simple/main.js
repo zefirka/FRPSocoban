@@ -77,6 +77,7 @@ var Sokoban = function(level){
   function isArrows(e){return e.keyCode >= 37 && e.keyCode <= 40}
   function player(){return lvl.player}
   function isEmpty(e){
+    console.log("Is empty this: "+ this)
     for(var i=0,l=lvl.walls.length;i<l;i++){
       if(e.x == lvl.walls[i].x && e.y == lvl.walls[i].y)
         return false

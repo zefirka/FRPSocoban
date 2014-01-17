@@ -98,7 +98,8 @@ var Sokoban = function(level){
       }
       return res;
     },
-    getLevel : function(){return lvl}
+    getLevel : function(){return lvl},
+    getDirection : function(){return direction}
   };
 
   init();
