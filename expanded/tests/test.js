@@ -70,6 +70,15 @@ test("isEmpty function", function(){
   ok(game.functions.isEmpty({x:1,y:1}), "Correctly for player"); 
   ok(!game.functions.isEmpty({x:3,y:3}), "Correctly for blocks");
   ok(game.functions.isEmpty({x:5,y:4}), "Correctly for goals");
+  ok(game.functions.isEmpty({x:1,y:2}), "Correctly for empty");
+})
+
+test("newMineAllowed function", function(){
+  ok(!game.functions.newMineAllowed({x:0,y:0}), "Correctly for walls");
+  ok(!game.functions.newMineAllowed({x:1,y:1}), "Correctly for player"); 
+  ok(!game.functions.newMineAllowed({x:3,y:3}), "Correctly for blocks");
+  ok(!game.functions.newMineAllowed({x:5,y:4}), "Correctly for goals");
+  ok(game.functions.newMineAllowed({x:1,y:2}), "Correctly for empty");
 })
 
 test("checkCell (checking blocks) function", function(){
