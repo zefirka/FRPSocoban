@@ -6,8 +6,8 @@ var Sokoban = function(level){
 
   function generateMineAndRedraw(interval){
     setInterval(function(){
-      var genX = (1 + Math.random()*lvl.width) >> 0;
-      var genY = (1 + Math.random()*lvl.height) >> 0;
+      var genX = ((1 + Math.random()*lvl.width) >> 0) - 1;
+      var genY = ((1 + Math.random()*lvl.height) >> 0) - 1;
 
       $container.trigger({
         type : "mineCreated",
@@ -72,11 +72,6 @@ var Sokoban = function(level){
   function drawNewMine(e){
     lvl.mines.push(e);
     draw(e, "rgb(216, 18, 18)");
-    $container.trigger({
-      type : "newMineDrawed",
-      x : e.x,
-      y : e.y
-    })
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

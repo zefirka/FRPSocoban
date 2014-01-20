@@ -17,7 +17,7 @@ var Sokoban = function(levels){
           x: genX,
           y: genY
         });
-        generateMineAndRedraw(interval)
+        generateMineAndRedraw(interval);
       }, interval);
     }else{
       clearTimeout(mineGenTimeout);

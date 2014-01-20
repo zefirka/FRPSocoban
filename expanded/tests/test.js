@@ -36,8 +36,6 @@ test('Sokoban loaded', function () {
   ok(game.functions, "Sokoban functions is ready");
 });
 
-
-
 module("Functions");
 test("isArrows function", function(){
   ok(!game.functions.isArrows({keyCode:36}), "Correctly for keycode less than 37");
@@ -46,7 +44,6 @@ test("isArrows function", function(){
   ok(!game.functions.isArrows(undefined), "Correctly for undefined value");
   ok(!game.functions.isArrows({keyCode:undefined}), "Correctly for undefined property");
   ok(!game.functions.isArrows({keyCode:41}), "Correctly for keycode more than 40");
-  //я писал тесты но они провалились, поэтому я улучшил свою функцию
 })
 
 test("findDirection function", function(){
@@ -75,7 +72,6 @@ test("isEmpty function", function(){
   ok(game.functions.isEmpty({x:5,y:4}), "Correctly for goals");
 })
 
-//как видите, здесь уже это не работает.
 test("checkCell (checking blocks) function", function(){
   ok(!game.functions.checkCell("blocks")({x:0,y:0}), "Correctly for walls");
   ok(!game.functions.checkCell("blocks")({x:1,y:1}), "Correctly for player"); 
@@ -90,4 +86,20 @@ test("checkCell (checking mines) function", function(){
   ok(!game.functions.checkCell("mines")({x:3,y:3}), "Correctly for blocks");
   ok(!game.functions.checkCell("mines")({x:5,y:4}), "Correctly for goals");
   ok(game.functions.checkCell("mines")({x:2,y:4}), "Correctly for mines");
+})
+
+test("checkCell (checking walls) function", function(){
+  ok(game.functions.checkCell("walls")({x:0,y:0}), "Correctly for walls");
+  ok(!game.functions.checkCell("walls")({x:1,y:1}), "Correctly for player"); 
+  ok(!game.functions.checkCell("walls")({x:3,y:3}), "Correctly for blocks");
+  ok(!game.functions.checkCell("walls")({x:5,y:4}), "Correctly for goals");
+  ok(!game.functions.checkCell("walls")({x:2,y:4}), "Correctly for mines");
+})
+
+test("checkCell (checking goals) function", function(){
+  ok(!game.functions.checkCell("goals")({x:0,y:0}), "Correctly for walls");
+  ok(!game.functions.checkCell("goals")({x:1,y:1}), "Correctly for player"); 
+  ok(!game.functions.checkCell("goals")({x:3,y:3}), "Correctly for blocks");
+  ok(game.functions.checkCell("goals")({x:5,y:4}), "Correctly for goals");
+  ok(!game.functions.checkCell("goals")({x:2,y:4}), "Correctly for mines");
 })
